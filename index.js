@@ -53,7 +53,7 @@ const directoryOrFile = (url) => {
     // retorna archivos markdown filtrados
 };
 
-const getLinks = () => {
+const getLinks = (file) => {
     // Leer el archivo
     // filtrar los links
 }
