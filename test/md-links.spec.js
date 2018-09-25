@@ -6,12 +6,12 @@ describe('validarUrl', () => {
     expect(typeof (validarUrl)).toBe('function');
   });
 
-  it('Debería validar la url http://ejemplo.com y mostrar el siguiente texto: Es una url absoluta ', () => {
-    expect(validarUrl('http://ejemplo.com')).toBe('Es una url absoluta');
+  it('Debería validar la url D:/Data/Final/Infrastructure.gdb/Streets y mostrar el siguiente texto: Es una url absoluta ', () => {
+    expect(validarUrl('D:/Data/Final/Infrastructure.gdb/Streets')).toBe('Es una url absoluta');
   });
 
-  it('Debería validar la url /directorio/prueba.txt y mostrar el siguiente texto: Es una ruta relativa', () => {
-    expect(validarUrl('/directorio/prueba.txt')).toBe('Es una ruta relativa');
+  it('Debería validar la url ..\redlands.mdb\streets y mostrar el siguiente texto: Es una ruta relativa', () => {
+    expect(validarUrl('..\redlands.mdb\streets')).toBe('Es una ruta relativa');
   });
 
   it('Debería validar la url C:\Users\MaricruzJosefina\Downloads\lim-2018-05-bc-core-pm-socialnetwork-master y mostrar el siguiente texto: Es una ruta relativa', () => {

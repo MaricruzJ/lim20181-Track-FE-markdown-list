@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/MaricruzJ/lim20181-Track-FE-markdown-list#readme",
   "bin": {
-    "md-links": "./index.js"
+    "md-links": "cli.js"
   },
   "devDependencies": {
     "jest": "^23.5.0"
