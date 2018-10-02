@@ -126,6 +126,14 @@ const validateLinks = (arrayObjects) => {
     })
 }
 
+getBrokens = (data) => {
+    let broken = 0;
+    data.forEach(x => {
+        if (x.result === 'fail') broken++;
+    })
+    return broken;
+}
+
 const mdLinks = (url, options) => {
 
     if (!path.isAbsolute(url)) {
@@ -149,26 +157,28 @@ const mdLinks = (url, options) => {
                     array = array.concat(file);
                 });
 
-                if (options.validate) {
-                    return validateLinks(array).then(result => {
-                        console.log(result);
-                    })
+                let arrLinks = [];
+                array.map((obj) => {
+                    arrLinks.push(obj.href);
+                })
+
+                if (!options.validate && !options.stats) {
+                    return array;
+                } else if (options.stats && !options.validate) {
+                    return [array.length, new Set(arrLinks).size]
                 }
 
-                let x = [];
-                array.map((b) => {
-                    x.push(b.href);
-                })
-                console.log(new Set(x).size);
-
-
-                /* let setArray = new Set(array);
-                console.log(setArray); */
-                return array;
+                return validateLinks(array).then(result => {
+                    if (options.validate && options.stats) {
+                        return [array.length, new Set(arrLinks).size, getBrokens(result)];
+                    } else {
+                        return result;
+                    }
+                });
             });
         });
     } else {
-        console.log('La url ingresada no existe');
+        return 'La url ingresada no existe'
     }
 }
 

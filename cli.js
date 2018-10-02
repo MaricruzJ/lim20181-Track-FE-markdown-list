@@ -2,7 +2,8 @@
 const [, , ...args] = process.argv
 let pathEntered = `${args[0]}`;
 const mdLinks = require('./index');
-options = {
+
+let options = {
     validate: false,
     stats: false
 };
@@ -16,14 +17,23 @@ args.forEach(index => {
     }
 });
 
+
+
+
 mdLinks(pathEntered, options).then(data => {
 
-    if (!options.validate && !options.stats)
+    if (options.validate && !options.stats) {
         console.log(data);
-
-    if (options.stats){
-        console.log('Total: ' + data.length);
-        console.log('Unique: ');
+    } else if (options.stats && !options.validate) {
+        console.log('Total: ' + data[0]);
+        console.log('Unique:' + data[1]);
+    } else if (options.validate && options.stats) {
+        console.log('Total: ' + data[0]);
+        console.log('Unique: ' + data[1]);
+        console.log('Broken: ' + data[2]);
+    } else {
+        console.log(data);
     }
 
 });
+
